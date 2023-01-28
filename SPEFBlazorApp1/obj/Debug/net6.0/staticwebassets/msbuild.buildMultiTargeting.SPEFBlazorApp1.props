@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SPEFBlazorApp1.props" />
+</Project>

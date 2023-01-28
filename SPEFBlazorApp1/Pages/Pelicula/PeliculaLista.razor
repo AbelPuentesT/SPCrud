@@ -1,0 +1,45 @@
+﻿@page "/"
+@inject IPeliculaService _PeliculaService
+<h3>PeliculaLista</h3>
+@if (peliculas == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table ">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Genero</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var pelicula in peliculas)
+            {
+                <tr>
+
+                    <th>@pelicula.Id</th>
+                    <th>@pelicula.Nombre</th>
+                    <th>@pelicula.Genero</th>
+                    <th><a class="btn btn-primary" href="/add-pelicula/@pelicula.Id"><i>Edit</i></a></th>
+                    <th><a class="btn btn-danger" href="/delete-pelicula/@pelicula.Id"><i>Delete</i></a></th>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    public IEnumerable<Pelicula> peliculas;
+
+    protected async override Task OnInitializedAsync()
+    {
+        peliculas = await _PeliculaService.GetAllPeliculas();
+    }
+
+
+}
